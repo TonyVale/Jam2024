@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 12aa89cbdc822f04a92c1c0d8b90433c
+guid: afcb3eaab9e99694c96ee11547365d70
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inodoro_0
+      name: pixil-frame-0(18)_0
       rect:
         serializedVersion: 2
-        x: 1594
-        y: 3796
-        width: 2813
-        height: 3311
+        x: 0
+        y: 2194
+        width: 10000
+        height: 4206
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8acba755600485c46a57ec13efa14448
-      internalID: -1254703442
+      spriteID: b27ae1014f6d4124a9c144cbea2da8c8
+      internalID: -192676625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixil-frame-0(18)_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 10000
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a453d51b7488714393429bb2b378580
+      internalID: 438971048
       vertices: []
       indices: 
       edges: []
@@ -141,7 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Inodoro_0: -1254703442
+      pixil-frame-0(18)_0: -192676625
+      pixil-frame-0(18)_1: 438971048
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
