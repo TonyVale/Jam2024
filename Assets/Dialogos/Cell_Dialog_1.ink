@@ -1,17 +1,11 @@
 ﻿-> main
 
 === main ===
-Bienvenido !
-Este es un Test !
-Todo va god !
-    +[Opcion 1]
-        ->chosen("opcion a")
-    
-    +[Opcion 2]
-        ->chosen("opcion b")
-
+BEN LUGASTAIN
+ES TU ULTIMO DÍA ACA
+ANDA A DESAYUNAR 
+    +[ ]
+        ->chosen("...")
 === chosen(opcion) ===
-
-elegiste {opcion}!
-
+APURATE
 -> END

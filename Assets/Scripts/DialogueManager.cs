@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void Start() {
+        
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 
@@ -46,6 +47,7 @@ public class DialogueManager : MonoBehaviour
     }
     
     public void EnterDialogueMode(TextAsset inkJSON){
+        
         player.GetComponent<MovimientoHorizontal>().enabled = false;
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;

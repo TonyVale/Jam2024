@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sample_scene.unity
     guid: 948650a0f581fde44b706bd656ee61d6
+  - enabled: 1
+    path: Assets/Scenes/Celda.unity
+    guid: a2361853092a3f842a8d03c9311c444e
+  - enabled: 1
+    path: Assets/Scenes/Comedor.unity
+    guid: 2d9330a65b5f62f4288f4a07b6107450
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 78981e8881d8d3146ab1dc3b30d13050, type: 2}
