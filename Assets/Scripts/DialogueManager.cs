@@ -63,13 +63,14 @@ public class DialogueManager : MonoBehaviour
         currentStory.BindExternalFunction("ChangeSceneComedor", () => SceneManager.LoadScene(2));
         currentStory.BindExternalFunction("ChangeSceneEnfermeria", ()=>SceneManager.LoadScene(3));
         currentStory.BindExternalFunction("ChangeScenePatio", ()=>SceneManager.LoadScene(4));
+        currentStory.BindExternalFunction("ChangeSceneLavanderia", ()=>SceneManager.LoadScene(5));
         currentStory.BindExternalFunction("ChangeSceneCelda", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.N_de_Iteracion++;
             EditJson.SetDatos(datos);
             SceneManager.LoadScene(1);
         });
-        
+
         currentStory.BindExternalFunction("patio_scarface", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.patio_scarface++;

@@ -11,7 +11,7 @@ public class DialogueTrigger : MonoBehaviour
     //[SerializeField] private GameObject visualCue;
 
     [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
+    [SerializeField] public TextAsset inkJSON;
 
     public GameObject indicador;
     public bool canInteract;
