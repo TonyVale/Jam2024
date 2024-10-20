@@ -1,1 +1,3 @@
-﻿
+﻿"BELUGA FOREVER QUEST"...
+Que buen juego
+Quiero rejugarlo cuando salga

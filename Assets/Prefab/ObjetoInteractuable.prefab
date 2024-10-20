@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 337210931468219402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 30, z: -9}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -228,6 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c96377af56a6b84b86a6dc6bce093a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: 2ee1e7e7a1806d447a4df2fb16f46157, type: 3}
+  inkJSON: {fileID: 4900000, guid: 689c183e8dd425747b2e6d1e28ed4907, type: 3}
   indicador: {fileID: 337210931468219402}
   canInteract: 1
