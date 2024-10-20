@@ -30,8 +30,10 @@ public class DialogueTrigger : MonoBehaviour
             indicador.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Z)) 
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
                 canInteract = false;
+                Debug.Log("Aca falla si se repite esto");
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                
             }
         }
         else 

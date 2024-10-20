@@ -50,17 +50,76 @@ public class DialogueManager : MonoBehaviour
     }
     
     public void EnterDialogueMode(TextAsset inkJSON){
+
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
-        dialoguePanel.SetActive(true);
-        first = true;         
-        
-        currentStory.BindExternalFunction("ChangeSceneComedor", () => SceneManager.LoadScene(3));
-        
+
         player.GetComponent<MovimientoHorizontal>().enabled = false;
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
+        dialoguePanel.SetActive(true);
+        first = true;         
+        
+        currentStory.BindExternalFunction("ChangeSceneComedor", () => SceneManager.LoadScene(2));
+        currentStory.BindExternalFunction("ChangeSceneEnfermeria", ()=>SceneManager.LoadScene(3));
+        currentStory.BindExternalFunction("ChangeScenePatio", ()=>SceneManager.LoadScene(4));
+        currentStory.BindExternalFunction("ChangeSceneCelda", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.N_de_Iteracion++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("patio_scarface", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.patio_scarface++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("fish_lavanderia", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.fish_lavanderia++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("drHousearrest_enfermeria", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.drHousearrest_enfermeria++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("nurseHappy_enfermeria", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.nurseHappy_enfermeria++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("uniforme", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.uniforme++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("llaves", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.llaves++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
+        
+        currentStory.BindExternalFunction("riot", ()=>{
+            Datos datos = EditJson.GetDatos();
+            datos.riot++;
+            EditJson.SetDatos(datos);
+            SceneManager.LoadScene(1);
+        });
         ContinueStory();
+
     }
 
     private void ExitDialogueMode(){
@@ -113,6 +172,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void selectFirstChoice(){
+        if(choices!= null)
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
     }
 
