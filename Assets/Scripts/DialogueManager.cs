@@ -7,8 +7,11 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.SceneManagement;
 
+
 public class DialogueManager : MonoBehaviour
 {
+
+    public static int iteraciones;
 
     [Header("DialogueUI")]
 
@@ -24,20 +27,24 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
 
     public bool dialogueIsPlaying; 
-    private static DialogueManager intance; 
+    private static DialogueManager instance; 
+
+    private bool canContinueToNextLine = false;
+
+    private Coroutine displayLineCoroutine;
 
     private bool first;
     // Start is called before the first frame update
     private void Awake() {
-        intance = this; 
+        instance = this; 
     }
 
     public static DialogueManager GetInstance(){
-        return intance;
+        return instance;
     }
 
     private void Start() {
-        
+        iteraciones = 2;
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 
@@ -58,11 +65,10 @@ public class DialogueManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
         dialoguePanel.SetActive(true);
-        first = true;         
         
         currentStory.BindExternalFunction("ChangeSceneComedor", () => SceneManager.LoadScene(2));
         currentStory.BindExternalFunction("ChangeSceneEnfermeria", ()=>SceneManager.LoadScene(3));
-        currentStory.BindExternalFunction("ChangeScenePatio", ()=>SceneManager.LoadScene(4));
+        currentStory.BindExternalFunction("ChangeScenePatio", ()=>{Debug.Log("LLego Bien a ChangeScenePatio()");;SceneManager.LoadScene(4);});
         currentStory.BindExternalFunction("ChangeSceneLavanderia", ()=>SceneManager.LoadScene(5));
         currentStory.BindExternalFunction("ChangeSceneCelda", ()=>{
             Datos datos = EditJson.GetDatos();
@@ -75,59 +81,64 @@ public class DialogueManager : MonoBehaviour
             Datos datos = EditJson.GetDatos();
             datos.patio_scarface++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("fish_lavanderia", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.fish_lavanderia++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("drHousearrest_enfermeria", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.drHousearrest_enfermeria++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("nurseHappy_enfermeria", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.nurseHappy_enfermeria++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("uniforme", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.uniforme++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("llaves", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.llaves++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         
         currentStory.BindExternalFunction("riot", ()=>{
             Datos datos = EditJson.GetDatos();
             datos.riot++;
             EditJson.SetDatos(datos);
-            SceneManager.LoadScene(1);
+
         });
         ContinueStory();
 
     }
 
-    private void ExitDialogueMode(){
+    private IEnumerator ExitDialogueMode(){
+        
+        yield return new WaitForSeconds(0.2f);
+
         player.GetComponent<MovimientoHorizontal>().enabled = true;
+        
         dialogueIsPlaying = false; 
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        iteraciones--;
     }
 
     // Update is called once per frame
@@ -136,7 +147,8 @@ public class DialogueManager : MonoBehaviour
         if(!dialogueIsPlaying){
             return;
         }
-        else if(Input.GetKeyDown(KeyCode.Z) && first == false){
+        if(Input.GetKeyDown(KeyCode.Z) && canContinueToNextLine && currentStory.currentChoices.Count == 0 ){
+            Debug.Log("Presionaste Z de forma valida para pasar de dialogo");
             ContinueStory();
         }
         first = false;
@@ -144,17 +156,33 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory(){
          if(currentStory.canContinue){
-            dialogueText.text = currentStory.Continue();
-            if( dialogueText.text == "" && !currentStory.canContinue){
-                ExitDialogueMode();
+
+            if (displayLineCoroutine != null) 
+            {
+                StopCoroutine(displayLineCoroutine);
             }
-            DisplayChoices();
+
+            string nextLine = currentStory.Continue();
+            
+            if( nextLine.Equals("") && !currentStory.canContinue){
+                StartCoroutine(ExitDialogueMode());
+            }else{
+                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+            }
          }else{
-            ExitDialogueMode();
+            StartCoroutine(ExitDialogueMode());
          }
     }
 
+    private IEnumerator DisplayLine(string line){
+        dialogueText.text = line;
+        yield return new WaitForEndOfFrame();
+        DisplayChoices();
+        canContinueToNextLine = true;
+    }
+
     private void DisplayChoices(){
+
         List<Choice> currentChoices = currentStory.currentChoices;
 
         if(currentChoices.Count > choices.Length){
@@ -169,15 +197,27 @@ public class DialogueManager : MonoBehaviour
         for (int i = index ; i < choices.Length; i++){
             choices[i].gameObject.SetActive(false);
         } 
-        selectFirstChoice();
+
+        StartCoroutine(SelectFirstChoice());
+    
     }
 
-    private void selectFirstChoice(){
-        if(choices!= null)
+    private IEnumerator SelectFirstChoice() 
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+        Debug.Log("OK");
     }
 
     public void makeChoice(int choiceIndex){
-        currentStory.ChooseChoiceIndex(choiceIndex);
+        
+        if (canContinueToNextLine) 
+        {
+            currentStory.ChooseChoiceIndex(choiceIndex);
+            // NOTE: The below two lines were added to fix a bug after the Youtube video was made
+            InputManager.GetInstance().RegisterSubmitPressed(); // this is specific to my InputManager script
+            ContinueStory();
+        }
     }
 }

@@ -15,4 +15,5 @@ public class Datos
     public int llaves;
 
     public int riot;
+    public int escape_thimothy;
 }
