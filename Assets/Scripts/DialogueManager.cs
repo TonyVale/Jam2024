@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using System;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     private TextMeshProUGUI[] choicesText;
     public GameObject player;
 
+    public static int lastIndex;
     private Story currentStory;
 
     public bool dialogueIsPlaying; 
@@ -47,12 +50,16 @@ public class DialogueManager : MonoBehaviour
     }
     
     public void EnterDialogueMode(TextAsset inkJSON){
-        
-        player.GetComponent<MovimientoHorizontal>().enabled = false;
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-        first = true; 
+        first = true;         
+        
+        currentStory.BindExternalFunction("ChangeSceneComedor", () => SceneManager.LoadScene(3));
+        
+        player.GetComponent<MovimientoHorizontal>().enabled = false;
+        player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
         ContinueStory();
     }
 
@@ -64,7 +71,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(!dialogueIsPlaying){
             return;
@@ -78,6 +85,9 @@ public class DialogueManager : MonoBehaviour
     private void ContinueStory(){
          if(currentStory.canContinue){
             dialogueText.text = currentStory.Continue();
+            if( dialogueText.text == "" && !currentStory.canContinue){
+                ExitDialogueMode();
+            }
             DisplayChoices();
          }else{
             ExitDialogueMode();
