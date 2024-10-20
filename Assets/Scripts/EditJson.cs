@@ -5,15 +5,22 @@ using UnityEngine;
 
 public abstract class EditJson : MonoBehaviour
 {
-    static string rutaArchivo = Application.streamingAssetsPath + "/datos.json";
+    static string rutaArchivo = Application.streamingAssetsPath + "/save.json";
+
+
+
+    public static void deleteSave(){
+        string jsonOriginal = File.ReadAllText(Application.streamingAssetsPath + "/data.json");
+        Datos datos = JsonUtility.FromJson<Datos>(jsonOriginal);
+        SetDatos(datos);
+    }
 
 
     public static Datos GetDatos(){
         
         string jsonContenido = File.ReadAllText(rutaArchivo);
-        Datos datos = JsonUtility.FromJson<Datos>(jsonContenido);
-        
         return JsonUtility.FromJson<Datos>(jsonContenido);
+        
     }
 
     public static  void SetDatos(Datos getdatos){
