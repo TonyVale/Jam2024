@@ -1,4 +1,4 @@
-﻿EXTERNAL ChangeScenePatio()
+EXTERNAL ChangeScenePatio()
 -> main
 == main ==
 TODO EL MUNDO AL PATIO

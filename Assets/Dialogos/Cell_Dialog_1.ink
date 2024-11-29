@@ -1,4 +1,4 @@
-﻿EXTERNAL ChangeSceneComedor()
+EXTERNAL ChangeSceneComedor()
 ->main
 === main ===
 BEN LUGASTAIN

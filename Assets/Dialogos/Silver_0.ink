@@ -1,1 +1,1 @@
-﻿¡Feliz dia de la Beluga!
+¡Feliz dia de la Beluga!

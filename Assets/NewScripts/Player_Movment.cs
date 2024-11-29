@@ -26,7 +26,7 @@ public class MovimientoHorizontal : MonoBehaviour
     void Update()
     {
         // Detectar flecha izquierda
-        if(canWalk){
+        if(!DialogueManager.GetInstance().dialogueIsPlaying){
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 animator.SetBool("Walking",true);

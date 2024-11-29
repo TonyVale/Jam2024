@@ -1,4 +1,4 @@
-﻿-> main
+-> main
 
 === main ===
 ¿Ya te está afectando la celda de Timothy?

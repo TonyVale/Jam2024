@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 5695288356310631217, guid: 565afa00922cdac4893084f0e014844c, type: 3}
       propertyPath: inkJSON
       value: 
-      objectReference: {fileID: 4900000, guid: fdbab4e26b2bf944381d84f9b2514854, type: 3}
+      objectReference: {fileID: 4900000, guid: 228d9d960badc854bb61a4a877c69cda, type: 3}
     - target: {fileID: 6512339911200632168, guid: 565afa00922cdac4893084f0e014844c, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1652,6 +1652,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2098237133054369592, guid: 0cfdf3c547928824a9abd7d589e0520f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5895632356700167206, guid: 0cfdf3c547928824a9abd7d589e0520f, type: 3}
       propertyPath: m_Name
       value: Player

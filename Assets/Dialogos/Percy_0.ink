@@ -1,2 +1,2 @@
-﻿Che, dicen por ahi que es tu ultimo dia aca. 
+Che, dicen por ahi que es tu ultimo dia aca. 
 Si fuese vos tendria cuidado con quien hablo hoy…

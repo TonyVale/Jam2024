@@ -1,3 +1,3 @@
-﻿“¿Ya te está afectando la celda de Timothy? 
+“¿Ya te está afectando la celda de Timothy? 
 dicen que se volvió loco intentando escapar un dia antes de salir jajaja… 
 Nunca lo volvieron a ver.”
